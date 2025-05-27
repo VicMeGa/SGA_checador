@@ -138,3 +138,25 @@ body{
   margin: 20px;
   color: white;
 }
+
+.qr-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-modal-content {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}

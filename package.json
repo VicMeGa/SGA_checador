@@ -8,11 +8,9 @@
     "start:frontend": "cd Frontend && npm run dev"
   },
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "concurrently": "^8.2.2"
   },
   "dependencies": {
-
     "react-router-dom": "^7.6.0"
-
   }
 }
