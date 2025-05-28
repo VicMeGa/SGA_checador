@@ -90,7 +90,7 @@ body{
 }
 
 .estado h2{
-  font-size: 7vh;
+  font-size: 4vh;
   margin-top: 1rem;
   margin: 2rem;
 }
@@ -115,11 +115,11 @@ body{
 }
 
 .status-indicator .available .status-dot {
-  background-color: #E8F5E9;
+  background-color: #16e027;
 }
 
 .status-indicator .unavailable .status-dot {
-  background-color: #ffebee;
+  background-color: #d81330;
 }
 
 /*-------------------------->Botones<------------------*/
@@ -136,7 +136,7 @@ body{
   width: 4rem;
   height: 5rem;
   margin: 20px;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .qr-modal {
@@ -159,4 +159,13 @@ body{
   width: 90%;
   max-width: 500px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.divMostrarSalas select{
+  color:black;
+  height: 5vh;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background-color:rgba(168, 179, 191, .3);
+  font-size: 3.5vh;
 }
