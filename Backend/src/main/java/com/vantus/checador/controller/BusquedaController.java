@@ -8,17 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.vantus.checador.model.Sala;
 import com.vantus.checador.repository.SalaRepository;
-
-
-//@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/sga/buscar")
 public class BusquedaController {
 
-
     @Autowired
     private SalaRepository salaRepo;
-
 
     @GetMapping("/salas")
     public ResponseEntity<List<Sala>> obtenerSalas() {

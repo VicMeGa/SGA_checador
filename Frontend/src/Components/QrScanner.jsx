@@ -1,5 +1,6 @@
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { useEffect, useRef } from "react";
+import { X } from "lucide-react";
 
 const QrScanner = ({ onScanSuccess, onClose }) => {
   const scannerRef = useRef(null);
@@ -107,30 +108,90 @@ const QrScanner = ({ onScanSuccess, onClose }) => {
   };
 
   return (
-    <div>
-      {/* Header con botón de cerrar */}
-      <div>
-
-      </div>
-
-      {/* Contenedor del scanner */}
-      <div 
-        id="reader" 
-      />
-
-      {/* Instrucciones */}
-      <div style={{ 
-        marginTop: "15px", 
-        textAlign: "center",
-        color: "#6c757d",
-        fontSize: "14px"
+    // MODAL OVERLAY - Esto hace que se vea como ventana emergente
+    <div style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1000
+    }}>
+      {/* CONTENEDOR DEL MODAL */}
+      <div style={{
+        backgroundColor: "white",
+        borderRadius: "12px",
+        padding: "20px",
+        maxWidth: "500px",
+        maxHeight: "90vh",
+        position: "relative",
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
       }}>
-        <p style={{ margin: "5px 0" }}>
-          🎯 Coloca el código QR dentro del recuadro
-        </p>
-        <p style={{ margin: "5px 0" }}>
-          💡 Asegúrate de tener buena iluminación
-        </p>
+        {/* Header con botón de cerrar */}
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "20px",
+          borderBottom: "1px solid #e5e7eb",
+          paddingBottom: "15px"
+        }}>
+          <h3 style={{ 
+            margin: 0, 
+            color: "#1f2937",
+            fontSize: "18px",
+            fontWeight: "600"
+          }}>
+            Escanear Código QR
+          </h3>
+          <button
+            onClick={handleManualClose}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "8px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "background-color 0.2s",
+              ":hover": {
+                backgroundColor: "#f3f4f6"
+              }
+            }}
+            title="Cerrar scanner"
+          >
+            <X size={20} color="#6b7280" />
+          </button>
+        </div>
+
+        {/* Contenedor del scanner */}
+        <div id="reader" style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center"
+        }} />
+
+        {/* Instrucciones */}
+        <div style={{ 
+          marginTop: "20px", 
+          textAlign: "center",
+          color: "#6b7280",
+          fontSize: "14px",
+          lineHeight: "1.5"
+        }}>
+          <p style={{ margin: "8px 0" }}>
+            🎯 Coloca el código QR dentro del recuadro
+          </p>
+          <p style={{ margin: "8px 0" }}>
+            💡 Asegúrate de tener buena iluminación
+          </p>
+        </div>
       </div>
     </div>
   );

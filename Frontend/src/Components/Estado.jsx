@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 
-const Estado = () => {
+const Estado = ({ salaSeleccionada, setSalaSeleccionada }) => {
   const [salas, setSalas] = useState([]);
   const [loadingSalas, setLoad] = useState(false);
   const [errorSalas, setErr] = useState(null);
-  const [sala, setSala] = useState("");
   const [estadoSala, setEstadoSala] = useState(null);
+
 
   // Función para obtener hora actual en formato HH:mm
   const obtenerHoraActual = () => {
@@ -44,13 +44,13 @@ const Estado = () => {
   // Cuando cambia la sala, consultar su estado
   useEffect(() => {
     const verificarEstadoSala = async () => {
-      if (!sala) return;
+      if (!salaSeleccionada) return;
 
       const horaActual = obtenerHoraActual();
       const diaActual = obtenerDiaActual();
 
       try {
-        const resp = await fetch(`http://localhost:8080/sga/sala/${sala}/estado?hora=${horaActual}&dia=${diaActual}`);
+        const resp = await fetch(`http://localhost:8080/sga/sala/${salaSeleccionada}/estado?hora=${horaActual}&dia=${diaActual}`);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         setEstadoSala(data.estado); // "Ocupada" o "Disponible"
@@ -61,7 +61,7 @@ const Estado = () => {
     };
 
     verificarEstadoSala();
-  }, [sala]);
+  }, [salaSeleccionada]);
 
 
   return (
@@ -73,8 +73,8 @@ const Estado = () => {
       )}
 
       <select
-        value={sala}
-        onChange={(e) => setSala(e.target.value)}
+        value={salaSeleccionada}
+        onChange={(e) => setSalaSeleccionada(e.target.value)}
         disabled={loadingSalas || salas.length === 0}
         required
       >

@@ -12,13 +12,14 @@ public class Acceso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_acceso")
-    private Integer idInvitado;
+    private Integer idAcceso;
 
     @Column(name = "fecha_hora_entrada", nullable = false)
     private LocalDateTime fechaHoraEntrada;
 
-    @Column(name = "fecha_hora_salida", nullable = false)
-    private LocalDateTime fechaHoraSalida;
+    @Column(name = "tipo_acceso")
+    @Enumerated(EnumType.STRING)
+    private TipoAcceso tipoAcceso;
 
     public enum TipoAcceso {
         QR,
@@ -35,28 +36,28 @@ public class Acceso {
 
     // Setters y Getters
 
-    public Integer getIdInvitado() {
-        return idInvitado;
+    public TipoAcceso getTipoAcceso() {
+        return tipoAcceso;
     }
 
-    public void setIdInvitado(Integer idInvitado) {
-        this.idInvitado = idInvitado;
+    public void setTipoAcceso(TipoAcceso tipoAcceso) {
+        this.tipoAcceso = tipoAcceso;
     }
 
     public LocalDateTime getFechaHoraEntrada() {
         return fechaHoraEntrada;
     }
 
+    public Integer getIdAcceso() {
+        return idAcceso;
+    }
+
+    public void setIdAcceso(Integer idAcceso) {
+        this.idAcceso = idAcceso;
+    }
+
     public void setFechaHoraEntrada(LocalDateTime fechaHoraEntrada) {
         this.fechaHoraEntrada = fechaHoraEntrada;
-    }
-
-    public LocalDateTime getFechaHoraSalida() {
-        return fechaHoraSalida;
-    }
-
-    public void setFechaHoraSalida(LocalDateTime fechaHoraSalida) {
-        this.fechaHoraSalida = fechaHoraSalida;
     }
 
     public Usuario getUsuario() {
