@@ -12,7 +12,7 @@ public class Alumno {
     @Column(name = "id_alumno")
     private Integer idAlumno;
 
-    @Column(name = "matricula", nullable = false)
+    @Column(name = "matricula", nullable = false, unique = true)
     private String matricula;
 
     @Column(name = "semestre", nullable = false)
@@ -20,10 +20,6 @@ public class Alumno {
 
     @Column(name = "grupo", nullable = false)
     private String grupo;
-
-    @ManyToOne
-    @JoinColumn(name = "id_horario")
-    private Horario_Sala horario;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -61,14 +57,6 @@ public class Alumno {
 
     public void setGrupo(String grupo) {
         this.grupo = grupo;
-    }
-
-    public Horario_Sala getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario_Sala horario) {
-        this.horario = horario;
     }
 
     public Usuario getUsuario() {

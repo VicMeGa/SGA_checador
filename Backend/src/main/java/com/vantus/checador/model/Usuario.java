@@ -34,12 +34,18 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
-    @Column(name = "huellad_dactilar")
-    private byte[] huellaDactilar;
+    @Column(name = "huella_dactilar",columnDefinition = "LONGTEXT")
+    private String huellaDactilar;
 
     @Column(name = "codigoQR")
     private String codigoQR;
 
+    @Column(name = "activo")
+    private Boolean activo = true;
+
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] template;
+    
     // Enum personalizado para tipo_usuario
     public enum TipoUsuario {
         Administrativo,
@@ -104,14 +110,6 @@ public class Usuario {
     public void setProgramaEducativo(String programaEducativo) {
         this.programaEducativo = programaEducativo;
     }
-    
-    public byte[] getHuellaDactilar() {
-        return huellaDactilar;
-    }
-
-    public void setHuellaDactilar(byte[] huellaDactilar) {
-        this.huellaDactilar = huellaDactilar;
-    }
 
     public String getCodigoQR() {
         return codigoQR;
@@ -127,5 +125,29 @@ public class Usuario {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getHuellaDactilar() {
+        return huellaDactilar;
+    }
+
+    public void setHuellaDactilar(String huellaDactilar) {
+        this.huellaDactilar = huellaDactilar;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public byte[] getTemplate(){
+        return template;
+    }
+
+    public void setTemplate(byte[] template){
+        this.template = template;
     }
 }

@@ -4,6 +4,8 @@ import Cabeza from "./Components/Cabeza"
 import DivDerecho from './Components/DivDerecho';
 import DivIzquierdo from './Components/DivIzquierdo';
 import QrScanner from './Components/QrScanner';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [mostrarScanner, setMostrarScanner] = useState(false);
@@ -18,6 +20,18 @@ function App() {
   return (
     <>
       <Cabeza />
+      <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
       <div className='divIzquierdo'>
         <DivIzquierdo />
       </div>

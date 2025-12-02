@@ -23,6 +23,12 @@ import com.vantus.checador.repository.SalaRepository;
 import com.vantus.checador.model.Sala;
 import com.vantus.checador.model.Usuario;
 
+import java.util.Date;
+
+import com.vantus.checador.service.HuellaIdentificacionService;
+import com.vantus.checador.request.HuellaRequest;
+
+
 @RestController
 @RequestMapping("/sga/acceso")
 
@@ -30,6 +36,9 @@ public class RegistrarController {
 
     @Autowired
     private AdministrativoRepository administrativoRepo;
+
+    @Autowired
+    private HuellaIdentificacionService huellaIdentificacionService;
 
     @Autowired
     private AccesoRepository accesoRepo;
@@ -92,6 +101,33 @@ public ResponseEntity<String> registrarAcceso(@RequestBody RegistroAccesoRequest
                 .body("❌ Error al registrar acceso: " + e.getMessage());
     }
 }
+
+
+@PostMapping("/registrarHuella")
+public ResponseEntity<?> registrarAccesoPorHuella(@RequestBody HuellaRequest req) {
+
+    Usuario usuario = huellaIdentificacionService.identificarUsuario(req.getHuella());
+
+    if (usuario == null) {
+        return ResponseEntity.status(401).body("❌ Huella no identificada");
+    }
+
+    Sala sala = salaRepo.findById(req.getIdSala())
+                .orElseThrow(() -> new RuntimeException("Sala no encontrada"));
+
+    // Registrar acceso
+    Acceso acceso = new Acceso();
+    acceso.setUsuario(usuario);
+    //acceso.setUsuarioId(usuario.getId());
+    acceso.setTipoAcceso(Acceso.TipoAcceso.valueOf("Huella"));
+    acceso.setSala(sala);
+    acceso.setFechaHoraEntrada(LocalDateTime.now());
+
+    accesoRepo.save(acceso);
+
+    return ResponseEntity.ok("✔ Acceso registrado para " + usuario.getNombre());
+}
+
 
 
 }
