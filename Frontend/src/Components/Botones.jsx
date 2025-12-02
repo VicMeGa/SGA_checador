@@ -10,9 +10,11 @@ const Botones = ({ salaSeleccionada }) => {
     const [mensaje, setMensaje] = useState("");
     const [fingerprintData, setFingerprintData] = useState(null);
 
+    const back = import.meta.env.VITE_BACKEND_URL;
+
     const registrarHuellaBack = async (imagenBase64) => {
         try {
-            await fetch("http://localhost:8080/sga/acceso/registrarHuella", {
+            await fetch(`${back}/acceso/registrarHuella`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -28,7 +30,7 @@ const Botones = ({ salaSeleccionada }) => {
 
     const registraraccesoQr = async (tipo, codigo) => {
         try {
-                const response = await fetch("http://localhost:8080/sga/acceso/registrar", {
+                const response = await fetch(`${back}/acceso/registrar`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

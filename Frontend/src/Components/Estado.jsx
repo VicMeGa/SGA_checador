@@ -7,6 +7,8 @@ const Estado = ({ salaSeleccionada, setSalaSeleccionada }) => {
   const [errorSalas, setErr] = useState(null);
   const [estadoSala, setEstadoSala] = useState(null);
 
+  const back = import.meta.env.VITE_BACKEND_URL;
+
 
   // Función para obtener hora actual en formato HH:mm
   const obtenerHoraActual = () => {
@@ -27,7 +29,7 @@ const Estado = ({ salaSeleccionada, setSalaSeleccionada }) => {
       setLoad(true);
       setErr(null);
       try {
-        const resp = await fetch("http://localhost:8080/sga/buscar/salas");
+        const resp = await fetch(`${back}/buscar/salas`);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         setSalas(data);
@@ -50,7 +52,7 @@ const Estado = ({ salaSeleccionada, setSalaSeleccionada }) => {
       const diaActual = obtenerDiaActual();
 
       try {
-        const resp = await fetch(`http://localhost:8080/sga/sala/${salaSeleccionada}/estado?hora=${horaActual}&dia=${diaActual}`);
+        const resp = await fetch(`${back}/sala/${salaSeleccionada}/estado?hora=${horaActual}&dia=${diaActual}`);
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         setEstadoSala(data.estado); // "Ocupada" o "Disponible"
